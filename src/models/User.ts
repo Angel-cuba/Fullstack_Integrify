@@ -1,5 +1,4 @@
 import {model, Schema, Document} from "mongoose";
-import bcrypt from "bcrypt";
 
 
 export interface IUser extends Document {
@@ -9,7 +8,6 @@ export interface IUser extends Document {
   email: string;
   password: string;
   role: string;
-  comparePassword: (candidatePassword: string) => Promise<boolean>;
 }
 
 const userSchema = new Schema({
@@ -40,7 +38,6 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, "Password is required"],
-        trim: true,
     },
     role: {
         type: String,
@@ -49,20 +46,10 @@ const userSchema = new Schema({
     }
 });
 
-// Hash the password before saving
-userSchema.pre("save", async function(next) {
-    if (this.isModified("password")) return next();
-    
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(this.password, salt);
-    this.password = hash;
-      next()     // next() is required to continue the execution of the function
-}
-);
 
 //Method to compare the password against the current  password
-userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
-    return await bcrypt.compare(candidatePassword, this.password);
-}
+// userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
+//     return await bcrypt.compare(candidatePassword, this.password);
+// }
 
 export default model<IUser>("User", userSchema);

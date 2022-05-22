@@ -63,7 +63,6 @@ export const deleteProduct = async(req: Request, res: Response, next: NextFuncti
    } catch (error) {
      res.status(404).send(error)
    
-     
    }
 }
 

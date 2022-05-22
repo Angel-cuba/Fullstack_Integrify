@@ -1,11 +1,6 @@
 
- type User = {
-  id: string;
-  name: string;
-  lastname: string;
+ export type UserLogin = {
   email: string;
   password: string;
-  role: string;
-  
 }
 
