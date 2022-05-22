@@ -4,6 +4,10 @@ import cors from 'cors';
 import  'dotenv/config';
 import keys from './config/keys';
 
+// Importing routes
+import productRoutes from './routers/product';
+import userRoutes from './routers/user';
+
 //initializations
 const app = express();
 
@@ -22,7 +26,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('Hello World');
 })
-
+app.use('/products', productRoutes);
+app.use('/users', userRoutes);
 
 
 export default app;
