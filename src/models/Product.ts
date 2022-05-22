@@ -39,13 +39,6 @@ const productSchema = new Schema({
   },
   quantity:{
     type: Number,
-    min: [0, "Quantity must be at least 0"],
-    max: [1000000, "Quantity must be at most 1000000"],
-    trim: true,
-  },
-  buyerInformation:{
-    type: String,
-    default: "",
     trim: true,
   },
   createdAt:{

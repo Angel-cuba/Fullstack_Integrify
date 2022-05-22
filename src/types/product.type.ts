@@ -7,5 +7,4 @@ export type IProduct = Document &{
   image: string;
   category: string;
   quantity?: number;
-  buyerInformation: string;
 }
