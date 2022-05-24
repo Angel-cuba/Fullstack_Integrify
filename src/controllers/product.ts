@@ -32,19 +32,14 @@ console.log('name' ,name?.toString());
 
   
   try {
-   const products = await productService.getProductListBySearch(name)
-   //     const products = await Product.find({name: 'Winter'})
+   if(name){
+     const products = await productService.getProductListByName(name)
      return res.json(products)
-    // }
-    // if(description){
-    //   const products = await productService.getProductListBySearch(description)
-    //  return res.json(products)
-    // }
-    // if(category){
-    //   const products = await productService.getProductListBySearch(category)
-    //   return res.json(products)
-    // }  
-    // res.send('Nothing found')
+   }
+    if(category){
+      const products = await productService.getProductListByCategory(category)
+      return res.json(products)
+    }
   } catch (error) {
     res.status(400).send(error)
   }

@@ -9,11 +9,11 @@ const getAll = async (): Promise<IProduct[]> => {
   return Product.find();
 } 
 
-const getProductListBySearch = async (search: any): Promise<IProduct[]> => {
+const getProductListByName = async (search: any): Promise<IProduct[]> => {
   return Product.find(
   {
     //  $or: [
-      name: search 
+    name: search 
       //  category: search.trim() ,
 
       // { description: { $in: search} },
@@ -22,6 +22,14 @@ const getProductListBySearch = async (search: any): Promise<IProduct[]> => {
   }
   ).sort({ createdAt: -1 });
 }
+const getProductListByCategory = async (search: any): Promise<IProduct[]> => {
+  return Product.find(
+  {
+    category: search
+  }
+  ).sort({ createdAt: -1 });
+}
+
 
 const getOne = async (productId: string): Promise<IProduct | null> => {
   return Product.findById(productId);
@@ -39,7 +47,8 @@ const deleteProd = async (productId: string) => {
 export default {
   create,
   getAll,
-  getProductListBySearch,
+  getProductListByName,
+  getProductListByCategory,
   getOne,
   updateProd,
   deleteProd
