@@ -7,6 +7,7 @@ import keys from './config/keys';
 // Importing routes
 import productRoutes from './routers/product';
 import userRoutes from './routers/user';
+import adminRoutes from './routers/admin';
 
 //initializations
 const app = express();
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 })
 app.use('/products', productRoutes);
 app.use('/users', userRoutes);
+app.use(adminRoutes);
 
 
 export default app;
