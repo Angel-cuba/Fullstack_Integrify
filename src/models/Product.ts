@@ -2,7 +2,7 @@ import {model, Schema, Document} from "mongoose";
 import { IProduct } from "../types/product.type";
 
 const productSchema = new Schema({
-  title:{
+  name:{
     type: String,
     required: [true, "Title is required"],
     minlength: [3, "Title must be at least 3 characters long"],
