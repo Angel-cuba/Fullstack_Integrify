@@ -1,14 +1,14 @@
 import {Router} from 'express'
-import { createUser, deletingUser, getAnUser, loginUser, updateAnUser } from '../controllers/user';
+import { signUp, deletingUser, getAnUser, signIn , updateAnUser } from '../controllers/user';
 const router = Router();
 
-router.post('/newUser', createUser);
+router.post('/signup', signUp);
 router.get('/:id', getAnUser);
 router.put('/:id', updateAnUser);
 router.delete('/:id', deletingUser);
 
 //Login user
-router.post('/login', loginUser)
+router.post('/signin', signIn)
 
 
 export default router;

@@ -1,5 +1,5 @@
 import {model, Schema, Document} from "mongoose";
-
+import * as bcrypt from 'bcrypt'
 
 export interface IUser extends Document {
   id: string;
@@ -8,6 +8,7 @@ export interface IUser extends Document {
   email: string;
   password: string;
   role: string;
+  band: boolean;
 }
 
 const userSchema = new Schema({
@@ -43,13 +44,20 @@ const userSchema = new Schema({
         type: String,
         enum: ["USER", "ADMIN"],
         default: "USER"
+    },
+    band: {
+        type: Boolean,
+        default: false
     }
 });
 
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) {
+        return next();
+    }
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+});
 
-//Method to compare the password against the current  password
-// userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
-//     return await bcrypt.compare(candidatePassword, this.password);
-// }
 
 export default model<IUser>("User", userSchema);

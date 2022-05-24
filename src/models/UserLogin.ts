@@ -1,9 +1,11 @@
 import {model, Schema, Document} from "mongoose";
+import * as bcrypt from 'bcrypt'
 
 
 export interface ILogin extends Document {
   email: string;
   password: string;
+comparePassword: (candidatePassword: string) => Promise<boolean>;
 }
 
 const userSchema = new Schema({
@@ -23,5 +25,9 @@ const userSchema = new Schema({
     },
 });
 
+//Method to compare the password against the current  password
+userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
+   return bcrypt.compareSync(candidatePassword, this.password);
+}
 
 export default model<ILogin>("Login", userSchema, 'users');
