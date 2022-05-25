@@ -37,10 +37,6 @@ const productSchema = new Schema({
     maxlength: [30, "Category must be at most 30 characters long"],
     trim: true,
   },
-  quantity:{
-    type: Number,
-    trim: true,
-  },
   createdAt:{
     type: Date,
     default: Date.now,

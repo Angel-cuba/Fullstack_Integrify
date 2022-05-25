@@ -9,25 +9,22 @@ const getAll = async (): Promise<IProduct[]> => {
   return Product.find();
 } 
 
+//Searching with query parameters
+/** By Name */
 const getProductListByName = async (search: any): Promise<IProduct[]> => {
-  return Product.find(
-  {
-    //  $or: [
-    name: search 
-      //  category: search.trim() ,
-
-      // { description: { $in: search} },
-      // { category: { $in: search} },
-    // ],
-  }
-  ).sort({ createdAt: -1 });
+  return Product.aggregate([
+                      {
+                      $match: {name: search }
+                      }
+                 ] ).sort({ createdAt: -1 });
 }
+/**By Category */
 const getProductListByCategory = async (search: any): Promise<IProduct[]> => {
-  return Product.find(
+  return Product.aggregate([
   {
-    category: search
+   $match: {category: search}
   }
-  ).sort({ createdAt: -1 });
+  ]).sort({ createdAt: -1 });
 }
 
 

@@ -25,12 +25,7 @@ export const getProduct = async(req: Request, res: Response, next: NextFunction)
 
 export const getProductsBySearch = async(req: Request, res: Response, next: NextFunction) => {
   console.log(req.query)
-  const {name, category} = req.query
-  // res.send(`Products with search: ${req.query}`)
-  // 
-console.log('name' ,name?.toString());
-
-  
+  const {name, category} = req.query  
   try {
    if(name){
      const products = await productService.getProductListByName(name)
