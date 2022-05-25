@@ -8,3 +8,13 @@ export type IProduct = Document &{
   category: string;
   quantity?: number;
 }
+
+type MatchByName = {
+  name: string;
+};
+type MatchByCategory = {
+  category: string;
+};
+export type PiplineMatchStage = {
+  $match: MatchByName | MatchByCategory;
+};
